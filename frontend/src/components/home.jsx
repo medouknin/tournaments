@@ -12,7 +12,6 @@ const { Option } = Select;
 
 const Home = () => {
 	const dispatch = useDispatch();
-	const { activity, bikesIsLoading } = useSelector((state) => state.activity);
 	const { tournaments, tournamentsIsLoading } = useSelector((state) => state.tournaments);
 	const [filteredTournaments, setFilteredTournaments] = useState([]);
 	
