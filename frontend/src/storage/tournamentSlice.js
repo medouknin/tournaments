@@ -1,61 +1,43 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { message } from "antd";
-import Cookies from 'js-cookie';
 
 const initialState = {
 	tournaments: [],
-	tatournamentsIsLoading: false,
+	tournamentsIsLoading: false,
 	tournamentsError: null,
+	games: [], 
+	gamesIsLoading: false,
+	gamesError: null,
 };
 
-const getTournaments = createAsyncThunk("getTournaments", async () => {
-	try {
-		const response = await axios.get("http://127.0.0.1:8000/api/tournaments")
-		return response.data;
-	} catch (error) {
-		console.log("error : ", error);
-		throw error;
+const getTournaments = createAsyncThunk(
+	"tournaments/getTournaments",
+	async () => {
+		try {
+			const response = await axios.get("http://127.0.0.1:8000/api/tournaments");
+			return response.data;
+		} catch (error) {
+			console.log("error: ", error);
+			throw error;
+		}
 	}
-});
+);
 
-const addBike = createAsyncThunk("addBike", async (formData) => {
-	try {
-		const token = Cookies.get("token");
-		const response = await axios.post(
-			"http://127.0.0.1:8000/api/bikes",
-			formData,
-			{
-				headers: {
-					Authorization: `Bearer ${token}`,
-					"Content-Type": "multipart/form-data",
-				},
-			}
-		);
-		message.success("Tournament added successfully"); 
-		return response.data.bike; 
-	} catch (error) {
-		console.error("Error adding tournament:", error);
-		throw error;
+// New thunk to fetch games by tournament ID
+const getGamesByTournament = createAsyncThunk(
+	"tournaments/getGamesByTournament",
+	async (id) => {
+		try {
+			const response = await axios.get(
+				`http://127.0.0.1:8000/api/tournaments/${id}/games`
+			);
+			return response.data.games;
+		} catch (error) {
+			console.log("error: ", error);
+			throw error;
+		}
 	}
-});
-
-
-const deleteBike = createAsyncThunk("deleteBike", async (bikeId) => {
-	try {
-		const token = Cookies.get("token");
-		await axios.delete(`http://127.0.0.1:8000/api/bikes/${bikeId}`, {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-		});
-		message.success("Tournament deleted successfully");
-		return bikeId;
-	} catch (error) {
-		console.error("Error deleting Tournament:", error);
-		throw error;
-	}
-});
+);
 
 const tournamentsSlice = createSlice({
 	name: "tournaments",
@@ -64,48 +46,34 @@ const tournamentsSlice = createSlice({
 	extraReducers: (builder) => {
 		builder
 			.addCase(getTournaments.pending, (state) => {
-				state.tatournamentsIsLoading = true;
+				state.tournamentsIsLoading = true;
 				state.tournamentsError = null;
 			})
 			.addCase(getTournaments.fulfilled, (state, action) => {
-				state.tatournamentsIsLoading = false;
+				state.tournamentsIsLoading = false;
 				state.tournaments = action.payload;
 				state.tournamentsError = null;
 			})
 			.addCase(getTournaments.rejected, (state, action) => {
-				state.tatournamentsIsLoading = false;
+				state.tournamentsIsLoading = false;
 				state.tournamentsError = action.error.message;
 			})
-			.addCase(deleteBike.pending, (state) => {
-				state.tatournamentsIsLoading = true;
-				state.tournamentsError = null;
+			// Extra reducers for handling games
+			.addCase(getGamesByTournament.pending, (state) => {
+				state.gamesIsLoading = true;
+				state.gamesError = null;
 			})
-			.addCase(deleteBike.fulfilled, (state, action) => {
-				state.tatournamentsIsLoading = false;
-				state.tournaments = state.tournaments.filter((user) => {
-					user.id != action.payload;
-				});
-				state.tournamentsError = null;
+			.addCase(getGamesByTournament.fulfilled, (state, action) => {
+				state.gamesIsLoading = false;
+				state.games = action.payload;
+				state.gamesError = null;
 			})
-			.addCase(deleteBike.rejected, (state, action) => {
-				state.tatournamentsIsLoading = false;
-				state.tournamentsError = action.error.message;
-			})
-			.addCase(addBike.pending, (state) => {
-				state.tatournamentsIsLoading = true;
-				state.tournamentsError = null;
-			})
-			.addCase(addBike.fulfilled, (state, action) => {
-				state.tatournamentsIsLoading = false;
-				state.tournaments.push(action.payload); 
-				state.tournamentsError = null;
-			})
-			.addCase(addBike.rejected, (state, action) => {
-				state.tatournamentsIsLoading = false;
-				state.tournamentsError = action.error.message;
+			.addCase(getGamesByTournament.rejected, (state, action) => {
+				state.gamesIsLoading = false;
+				state.gamesError = action.error.message;
 			});
 	},
 });
 
-export { getTournaments, deleteBike , addBike};
+export { getTournaments, getGamesByTournament };
 export default tournamentsSlice.reducer;

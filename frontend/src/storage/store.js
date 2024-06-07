@@ -5,7 +5,8 @@ import usersSlice from "./usersSlice";
 import bikesSlice from "./bikesSlice";
 import rentalsSlice from "./rentalsSlice";
 import tournamentsSlice from "./tournamentSlice"
- 
+import teamSLice from "./teamSLice";
+
 const store = configureStore({
 	reducer: {
 		theme: themeReducer,
@@ -13,7 +14,8 @@ const store = configureStore({
 		users: usersSlice,
 		activity: bikesSlice,
 		rentals: rentalsSlice,
-		tournaments : tournamentsSlice,
+		tournaments: tournamentsSlice,
+		team: teamSLice,
 	},
 });
 

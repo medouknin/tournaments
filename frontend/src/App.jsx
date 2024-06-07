@@ -14,6 +14,7 @@ import UserProfile from "./components/userProfile";
 import "./App.css";
 import UserEdit from "./components/userEdit";
 import ChangePassword from "./components/changePassword";
+import Games from "./components/games";
 
 
 function App() {
@@ -42,12 +43,16 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Landing />} />
 				<Route path="/home" element={<Home />} />
+				<Route path="/games" element={<Games />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/register" element={<Register />} />
 				<Route path="/reserve/:id" element={<Reservation />} />
 				<Route path="/profile/:id" element={<UserProfile />} />
 				<Route path="/profile/:id/edit" element={<UserEdit />} />
-				<Route path="/profile/:id/edit/change-password" element={<ChangePassword />} />
+				<Route
+					path="/profile/:id/edit/change-password"
+					element={<ChangePassword />}
+				/>
 				<Route path="/dashboard" element={<Dashboard />} />
 				<Route path="*" element={<NotFound />} />
 			</Routes>

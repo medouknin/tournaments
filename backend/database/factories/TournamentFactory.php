@@ -13,6 +13,9 @@ class TournamentFactory extends Factory
         return [
             'name' => $this->faker->word,
             'tournamentType' => $this->faker->randomElement(['basketball', 'football', 'tennis']),
+            'TourPhoto' => $this->faker->imageUrl(640, 480, 'sports', true, 'Faker'),
+            'fees' => $this->faker->randomFloat(2, 10, 100),  
+            'number_of_players' => $this->faker->numberBetween(1, 5)
         ];
     }
 }

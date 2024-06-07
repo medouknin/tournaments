@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\BikeController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\RentalController;
+use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -65,4 +67,10 @@ Route::prefix('/tournaments')->group(function () {
     Route::get('/', [TournamentController::class, 'index']);
     Route::post('/', [TournamentController::class, 'store']);
     Route::delete('/{id}', [TournamentController::class, 'destroy']);
+    Route::get('/{id}/games', [GameController::class, 'gamesByTournament']);
+
+});
+
+Route::prefix('teams')->group(function () {
+    Route::post('/', [TeamController::class, 'store'])->name('teams.store');
 });

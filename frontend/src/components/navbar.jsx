@@ -62,6 +62,7 @@ function Navbar() {
 	const encryptedId = btoa(JSON.stringify(loggedUser.id));
 	const pages = [
 		{ title: "Home", path: "/home" },
+		{ title: "Games", path: "/games" },
 		{ title: "Profile", path: `/profile/${encryptedId}` },
 	];
 
