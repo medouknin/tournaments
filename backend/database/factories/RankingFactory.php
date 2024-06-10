@@ -1,4 +1,6 @@
 <?php
+// database/factories/RankingFactory.php
+
 namespace Database\Factories;
 
 use App\Models\Ranking;
@@ -13,12 +15,10 @@ class RankingFactory extends Factory
     public function definition()
     {
         return [
-            'team_id' => Team::factory()->create()->id,
-            'tournament_id' => Tournament::factory()->create()->id,
-            'points' => $this->faker->numberBetween(0, 100),
-            'wins' => $this->faker->numberBetween(0, 20),
-            'losses' => $this->faker->numberBetween(0, 20),
-            'rank' => $this->faker->numberBetween(1, 20),
+            'team_id' => Team::factory(),
+            'tournament_id' => Tournament::factory(),
+            'points' => $this->faker->numberBetween(0, 50),
+            'rank' => $this->faker->unique()->numberBetween(1, 10),
         ];
     }
 }

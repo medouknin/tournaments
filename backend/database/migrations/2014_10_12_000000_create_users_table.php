@@ -18,8 +18,6 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->boolean('isAdmin')->default(false);
-            $table->boolean('isArbitre')->default(false);
-            $table->boolean('isCaptain')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

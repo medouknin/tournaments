@@ -1,8 +1,11 @@
 <?php
+// database/factories/TeamFactory.php
+
 namespace Database\Factories;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Models\Tournament;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TeamFactory extends Factory
@@ -13,8 +16,8 @@ class TeamFactory extends Factory
     {
         return [
             'name' => $this->faker->company,
-            'playersNumber' => $this->faker->numberBetween(5, 20),
-            'captain_id' => User::factory()->create()->id,
+            'captain_id' => User::factory(),
+            'tournament_id' => Tournament::factory(),
         ];
     }
 }

@@ -1,4 +1,6 @@
 <?php
+// database/factories/PlayerFactory.php
+
 namespace Database\Factories;
 
 use App\Models\Player;
@@ -13,7 +15,8 @@ class PlayerFactory extends Factory
     {
         return [
             'name' => $this->faker->name,
-            'team_id' => Team::factory()->create()->id,
+            'team_id' => Team::factory(),
+            'goals' => $this->faker->numberBetween(0, 20),
         ];
     }
 }

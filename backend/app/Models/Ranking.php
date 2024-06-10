@@ -1,16 +1,14 @@
 <?php
 
+// app/Models/Ranking.php
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Ranking extends Model
 {
-    use HasFactory;
-    protected $fillable = [
-        'team_id', 'tournament_id', 'points', 'wins', 'losses', 'rank'
-    ];
+    protected $fillable = ['team_id', 'tournament_id', 'points', 'rank'];
 
     public function team()
     {

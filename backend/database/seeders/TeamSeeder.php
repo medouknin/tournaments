@@ -1,5 +1,7 @@
 <?php
 
+// database/seeders/TeamSeeder.php
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -12,4 +14,3 @@ class TeamSeeder extends Seeder
         Team::factory()->count(10)->create();
     }
 }
-

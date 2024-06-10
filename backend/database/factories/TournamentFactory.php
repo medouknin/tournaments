@@ -1,4 +1,6 @@
 <?php
+// database/factories/TournamentFactory.php
+
 namespace Database\Factories;
 
 use App\Models\Tournament;
@@ -11,11 +13,13 @@ class TournamentFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word,
-            'tournamentType' => $this->faker->randomElement(['basketball', 'football', 'tennis']),
-            'TourPhoto' => $this->faker->imageUrl(640, 480, 'sports', true, 'Faker'),
-            'fees' => $this->faker->randomFloat(2, 10, 100),  
-            'number_of_players' => $this->faker->numberBetween(1, 5)
+            'title' => $this->faker->sentence,
+            'description' => $this->faker->paragraph,
+            'photo' => null,
+            'type' => $this->faker->randomElement(['football', 'basketball', 'tennis']),
+            'teams' => $this->faker->numberBetween(4, 10),
+            'players' => $this->faker->numberBetween(10, 20),
+            'fees' => $this->faker->randomFloat(2, 10, 100),
         ];
     }
 }

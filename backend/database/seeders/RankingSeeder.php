@@ -1,5 +1,7 @@
 <?php
 
+// database/seeders/RankingSeeder.php
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -9,7 +11,7 @@ class RankingSeeder extends Seeder
 {
     public function run()
     {
-        Ranking::factory()->count(30)->create();
+        Ranking::factory()->count(10)->create();
     }
 }
 

@@ -1,5 +1,7 @@
 <?php
 
+// database/seeders/GameSeeder.php
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -9,7 +11,7 @@ class GameSeeder extends Seeder
 {
     public function run()
     {
-        Game::factory()->count(15)->create();
+        Game::factory()->count(10)->create();
     }
 }
 

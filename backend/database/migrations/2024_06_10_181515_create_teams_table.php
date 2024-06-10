@@ -9,17 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+
+    public function up()
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('playersNumber');
-            $table->unsignedBigInteger('captain_id');
-            $table->foreign('captain_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('captain_id')->constrained('users');
+            $table->foreignId('tournament_id')->constrained();
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

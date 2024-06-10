@@ -13,27 +13,6 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public function rentals()
-    {
-        return $this->hasMany(Rental::class);
-    }
-
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
-    protected $guarded = [];
-
-    protected $fillable = [
-        'name', 'email', 'password', 'isAdmin', 'isArbitre', 'isCaptain'
-    ];
-
-
-    public function teams()
-    {
-        return $this->hasMany(Team::class, 'captain_id');
-    }
     /**
      * The attributes that should be hidden for serialization.
      *

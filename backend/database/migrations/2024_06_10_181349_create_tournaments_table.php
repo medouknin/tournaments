@@ -9,15 +9,23 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    // database/migrations/{timestamp}_create_tournaments_table.php
+
+    public function up()
     {
         Schema::create('tournaments', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('tournamentType');
+            $table->string('title');
+            $table->text('description');
+            $table->string('photo')->nullable();
+            $table->enum('type', ['football', 'basketball', 'tennis']);
+            $table->integer('teams');
+            $table->integer('players');
+            $table->decimal('fees', 8, 2);
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

@@ -9,22 +9,20 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    // database/migrations/{timestamp}_create_rankings_table.php
+
+    public function up()
     {
         Schema::create('rankings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('team_id');
-            $table->unsignedBigInteger('tournament_id');
-            $table->integer('points');
-            $table->integer('wins');
-            $table->integer('losses');
-            $table->integer('rank')->nullable();
+            $table->foreignId('team_id')->constrained();
+            $table->foreignId('tournament_id')->constrained();
+            $table->integer('points')->default(0);
+            $table->integer('rank')->unique();
             $table->timestamps();
-
-            $table->foreign('team_id')->references('id')->on('teams')->onDelete('cascade');
-            $table->foreign('tournament_id')->references('id')->on('tournaments')->onDelete('cascade');
         });
     }
+
 
     /**
      * Reverse the migrations.
