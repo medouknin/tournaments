@@ -27,18 +27,18 @@ Route::post('/auth/register', [AuthController::class, 'register']);
 Route::get('/me/user', [AuthController::class, 'me']);
 Route::post('/logout', [AuthController::class, 'logout']);
 
+Route::prefix('users')->group(function () {
+    Route::get('/', [UserController::class, 'index']);
+});
 
 Route::prefix('/tournaments')->group(function () {
     Route::get('/', [TournamentController::class, 'index']);
-    Route::post('/', [TournamentController::class, 'store']);
-    Route::delete('/{id}', [TournamentController::class, 'destroy']);
+    Route::post('/store', [TournamentController::class, 'store']);
     Route::get('/{id}/games', [GameController::class, 'gamesByTournament']);
-
 });
 
 Route::prefix('teams')->group(function () {
     Route::get('/', [TeamController::class, 'index']);
     Route::post('/store', [TeamController::class, 'store']);
     Route::get('/my-team/{id}', [TeamController::class, 'myTeam']);
-
 });

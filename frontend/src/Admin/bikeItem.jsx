@@ -12,23 +12,9 @@ export default function BikeItem({ bike }) {
 	return (
 		<tr>
 			<td>{bike.type}</td>
-			<td>{bike.size}</td>
-			<td>{bike.price_per_hour}$</td>
-			<td>{bike.material}</td>
-			<td>{bike.brand}</td>
-			<td>
-				{!bike.isRented ? (
-					<div className="flex items-center gap-2">
-						<div className="w-2 h-2 bg-green-200 rounded-xl"></div>
-						Yes
-					</div>
-				) : (
-					<div className="flex items-center gap-2">
-						<div className="w-2 h-2 bg-red-200 rounded-xl"></div>
-						No
-					</div>
-				)}
-			</td>
+			<td>{bike.teams}</td>
+			<td>{bike.fees}$</td>
+			<td>{bike.players}</td>
 			<td className=" flex gap-1 py-1">
 				<button className="btn btn-primary  ">Edit</button>
 				<Popconfirm

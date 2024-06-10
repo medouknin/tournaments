@@ -16,7 +16,6 @@ export default function UserItem({ user }) {
 		<tr>
 			<td>{user.name}</td>
 			<td>{user.email}</td>
-			<td>{user.phone}</td>
 			<td className="flex gap-1 py-1">
 				<Popconfirm
 					title="Are you sure you want to delete this user?"

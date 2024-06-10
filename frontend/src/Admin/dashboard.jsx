@@ -38,7 +38,7 @@ const Dashboard = () => {
 	const [collapsed, setCollapsed] = useState(false);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const isDark = useSelector((state) => state.theme.isDark);
+	const [isDark, setIsDark] = useState(false) 
 	const selectedTab = useSelector((state) => state.dashboard.selectedTab);
 
 	useEffect(() => {
@@ -48,7 +48,7 @@ const Dashboard = () => {
 		}
 	}, [navigate]);
 	const toggleTheme = () => {
-		dispatch(toggleThemeMode());
+		setIsDark(!isDark);
 	};
 
 	return (

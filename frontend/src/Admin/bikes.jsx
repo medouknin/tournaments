@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import BikeItem from "./bikeItem";
 import { FaSearch } from "react-icons/fa";
+import { getTournaments } from "../storage/tournamentSlice";
+import BikeItem from "./bikeItem";
 
 export default function BikesList() {
 	const dispatch = useDispatch();
-	const { activity} = useSelector((state) => state.activity);
+	const { tournaments } = useSelector((state) => state.tournaments);
 	const [searchQuery, setSearchQuery] = useState("");
 
 	useEffect(() => {
-		dispatch(getBikes());
+		dispatch(getTournaments());
 	}, [dispatch]);
 
-	const filteredBikes = activity.filter(
+	const filteredBikes = tournaments.filter(
 		(bike) =>
-			bike.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
 			bike.type.toLowerCase().includes(searchQuery.toLowerCase())
 	);
 
@@ -41,11 +41,9 @@ export default function BikesList() {
 					<thead>
 						<tr>
 							<th>Type</th>
-							<th>Number of players</th>
+							<th>Number of teams</th>
 							<th>Inscription fee </th>
-							<th>Mode</th>
-							<th>Tournament</th>
-							<th>Disponible</th>
+							<th>Plauyers per team</th>
 							<th>Action</th>
 						</tr>
 					</thead>

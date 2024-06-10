@@ -5,32 +5,26 @@ import { GrMoney } from "react-icons/gr";
 import { getUsers } from "../storage/usersSlice";
 import { useDispatch, useSelector } from 'react-redux';
 import Charts from "./chatrs";
+import { getTournaments } from "../storage/tournamentSlice";
 
 
 export default function Statistics() {
 	const dispatch = useDispatch();
 	const { users, usersIsLoading } = useSelector((state) => state.users);
-	const { activity, bikesIsLoading } = useSelector((state) => state.activity);
-	const { rentals, totalIncome, rentalsIsLoading } = useSelector(
-		(state) => state.rentals
-	);
+	const { tournaments } = useSelector(state => state.tournaments);
 
-	const availableBikes = activity.filter(bike => {
-		return !bike.isRented ;
-	})
 
 
 	useEffect(() => {
+		dispatch(getTournaments());
 		dispatch(getUsers());
-		dispatch(getBikes());
-		dispatch(getTotalIncome());
 	}, [dispatch]);
 	return (
 		<div className="p-3 flex flex-col gap-3">
 			<div className=" flex gap-3 justify-between">
 				<div className="stats-card bg-red-400">
 					<div>
-						<h4>Customers</h4>
+						<h4>Users</h4>
 						<p className="text-4xl">{users.length}</p>
 					</div>
 					<div className="stats-card-icon">
@@ -41,7 +35,7 @@ export default function Statistics() {
 					<div className="w-2/4">
 						<h4>Tournaments</h4>
 						<p className="text-4xl">
-							{availableBikes.length} / {activity.length}
+							{tournaments.length}
 						</p>
 					</div>
 					<div className="stats-card-icon">
@@ -52,16 +46,16 @@ export default function Statistics() {
 				<div className=" stats-card bg-green-400 ">
 					<div>
 						<h4>Income</h4>
-						<p className="text-4xl text-nowrap">
+						{/* <p className="text-4xl text-nowrap">
 							{totalIncome} <span className="text-xl">$</span>
-						</p>
+						</p> */}
 					</div>
 					<div className="stats-card-icon">
 						<GrMoney className="text-9xl" />
 					</div>
 				</div>
 			</div>
-			<Charts users={users} bikes={activity} rentals={rentals} />
+			<Charts users={users} bikes={tournaments}  />
 		</div>
 	);
 }

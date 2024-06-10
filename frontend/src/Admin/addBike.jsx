@@ -1,18 +1,17 @@
 import React from "react";
-import { Form, Input, Button, Select, Upload } from "antd";
+import { Form, Button, Select, Upload, Input, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
+import axios from "axios";
 
 const { Option } = Select;
 
-const AddBike = () => {
-	const dispatch = useDispatch();
-	const [form] = Form.useForm(); 
+const AddTournament = () => {
+	const [form] = Form.useForm(); // Initialize form instance
 
-	const onFinish = (values) => {
+	const onFinish = async (values) => {
 		const formData = new FormData();
 		Object.keys(values).forEach((key) => {
-			if (key === "image") {
+			if (key === "photo") {
 				if (values[key]?.[0]?.originFileObj) {
 					formData.append(key, values[key][0].originFileObj);
 				}
@@ -21,41 +20,37 @@ const AddBike = () => {
 			}
 		});
 
-		dispatch(addBike(formData));
-		form.resetFields(); 
-	};
-
-	const normFile = (e) => {
-		if (Array.isArray(e)) {
-			return e;
+		try {
+			await axios.post(
+				"http://127.0.0.1:8000/api/tournaments/store",
+				formData,
+				{
+					headers: {
+						"Content-Type": "multipart/form-data",
+					},
+				}
+			);
+			message.success("Tournament created successfully");
+			form.resetFields(); // Reset form fields
+		} catch (error) {
+			message.error("Error creating tournament:", error);
 		}
-		return e && e.fileList && e.fileList.length > 0 ? [e.fileList[0]] : [];
 	};
 
-
-	const materialOptions = ["Morning", "Afternoon", "Night"];
-	const brandOptions = [
-		"Football",
-		"Tenis",
-		"BasketBall",
-		
-	];
-	const typeOptions = [
-		"Friendly",
-		"Awarded",
-	
-	];
-	const sizeOptions = [""];
+	const typeOptions = ["Football", "Basketball", "Tennis"];
+	const teamOptions = [4, 8, 16, 32];
+	const playerOptions = [1, 2, 5, 8];
 
 	return (
 		<div className="flex py-4">
 			<div className="w-full">
 				<Form
-					name="addBikeForm"
+					form={form} // Pass the form instance to the Form component
+					name="AddTournamentForm"
 					onFinish={onFinish}
 					className="grid grid-cols-2 w-full justify-between"
 					initialValues={{
-						isRented: false, 
+						isRented: false,
 					}}
 					labelCol={{
 						span: 8,
@@ -64,23 +59,54 @@ const AddBike = () => {
 						span: 16,
 					}}>
 					<Form.Item
-						label="Tournament"
-						name="brand"
+						label="Title"
+						name="title"
 						rules={[
 							{
 								required: true,
-								message: "Please input the tournament !",
+								message: "Please input the title!",
 							},
 						]}>
-						<Input/>
+						<Input />
 					</Form.Item>
 					<Form.Item
-						label="Type of Tournament"
+						label="Description"
+						name="description"
+						rules={[
+							{
+								required: true,
+								message: "Please input the description!",
+							},
+						]}>
+						<Input.TextArea />
+					</Form.Item>
+					<Form.Item
+						label="Image"
+						name="photo"
+						valuePropName="fileList"
+						getValueFromEvent={(e) => e.fileList}
+						rules={[
+							{
+								required: true,
+								message: "Please upload an image!",
+							},
+						]}>
+						<Upload
+							name="photo"
+							listType="picture"
+							accept=".png,.jpeg,.jpg"
+							multiple={false}
+							beforeUpload={() => false}>
+							<Button icon={<UploadOutlined />}>Upload</Button>
+						</Upload>
+					</Form.Item>
+					<Form.Item
+						label="Type"
 						name="type"
 						rules={[
 							{
 								required: true,
-								message: "Please input the type of tournament!",
+								message: "Please select the type!",
 							},
 						]}>
 						<Select>
@@ -92,74 +118,49 @@ const AddBike = () => {
 						</Select>
 					</Form.Item>
 					<Form.Item
-						label="Number of players"
-						name="size"
+						label="Number of teams"
+						name="teams"
 						rules={[
 							{
 								required: true,
-								message: "Please input the number of players!",
-							},
-						]}>
-						<Input/>
-					</Form.Item>
-					<Form.Item
-						label="Mode"
-						name="material"
-						rules={[
-							{
-								required: true,
-								message: "Please select the mode of tournament!",
+								message: "Please select the number of teams!",
 							},
 						]}>
 						<Select>
-							{materialOptions.map((material) => (
-								<Option key={material} value={material}>
-									{material}
+							{teamOptions.map((option) => (
+								<Option key={option} value={option}>
+									{option}
 								</Option>
 							))}
 						</Select>
 					</Form.Item>
 					<Form.Item
-						label="Inscription fee"
-						name="price_per_hour"
+						label="Number of players per team"
+						name="players"
 						rules={[
 							{
 								required: true,
-								message: "Please input inscription free!",
+								message: "Please select the number of players per team!",
+							},
+						]}>
+						<Select>
+							{playerOptions.map((option) => (
+								<Option key={option} value={option}>
+									{option}
+								</Option>
+							))}
+						</Select>
+					</Form.Item>
+					<Form.Item
+						label="Fees"
+						name="fees"
+						rules={[
+							{
+								required: true,
+								message: "Please input the fees!",
 							},
 						]}>
 						<Input />
-					</Form.Item>
-					<Form.Item
-						label="Description"
-						name="description"
-						rules={[
-							{
-								required: true,
-								message: "Please input the description of bike!",
-							},
-						]}>
-						<Input.TextArea />
-					</Form.Item>
-					<Form.Item
-						name="image"
-						label="Image"
-						valuePropName="fileList"
-						getValueFromEvent={normFile}
-						rules={[
-							{
-								required: true,
-								message: "Please upload an image of the tournament!",
-							},
-						]}>
-						<Upload
-							name="image"
-							listType="picture"
-							accept=".png,.jpeg,.jpg"
-							multiple={false}
-							beforeUpload={() => false}>
-							<Button icon={<UploadOutlined />}>Upload</Button>
-						</Upload>
 					</Form.Item>
 					<Form.Item name="isRented" valuePropName="checked" hidden>
 						<Input type="hidden" />
@@ -175,4 +176,4 @@ const AddBike = () => {
 	);
 };
 
-export default AddBike;
+export default AddTournament;
