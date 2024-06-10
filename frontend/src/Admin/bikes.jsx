@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { getBikes } from "../storage/bikesSlice";
 import { useSelector, useDispatch } from "react-redux";
 import BikeItem from "./bikeItem";
 import { FaSearch } from "react-icons/fa";

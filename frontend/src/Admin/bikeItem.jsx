@@ -1,7 +1,6 @@
 import React from "react";
 import { FaTrashAlt } from "react-icons/fa";
 import { useDispatch } from "react-redux";
-import { deleteBike } from "../storage/bikesSlice";
 import { Popconfirm } from "antd";
 
 export default function BikeItem({ bike }) {

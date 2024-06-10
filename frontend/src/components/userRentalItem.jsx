@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { cancelRental } from "../storage/rentalsSlice";
 import { Popconfirm, message } from "antd";
 
 const UserRentalItem = ({ userRental, activity }) => {

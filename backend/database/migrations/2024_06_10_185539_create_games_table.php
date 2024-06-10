@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('stade_id')->constrained('stades');
             $table->foreignId('tournament_id')->constrained();
             $table->date('date');
-            $table->integer('home_goals')->default(0);
-            $table->integer('away_goals')->default(0);
+            $table->integer('home_goals')->nullable();
+            $table->integer('away_goals')->nullable();
             $table->timestamps();
         });
     }

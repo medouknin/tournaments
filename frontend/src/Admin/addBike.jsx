@@ -2,7 +2,6 @@ import React from "react";
 import { Form, Input, Button, Select, Upload } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
-import { addBike } from "../storage/bikesSlice";
 
 const { Option } = Select;
 

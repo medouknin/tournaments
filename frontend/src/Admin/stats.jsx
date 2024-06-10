@@ -3,9 +3,7 @@ import { FaUsers } from "react-icons/fa";
 import { TbTournament } from "react-icons/tb";
 import { GrMoney } from "react-icons/gr";
 import { getUsers } from "../storage/usersSlice";
-import { getBikes } from "../storage/bikesSlice";
 import { useDispatch, useSelector } from 'react-redux';
-import { getTotalIncome } from "../storage/rentalsSlice";
 import Charts from "./chatrs";
 
 

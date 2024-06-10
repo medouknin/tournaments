@@ -8,7 +8,6 @@ import { FaMoon, FaSun } from "react-icons/fa";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { Layout, Menu, Switch } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleThemeMode } from "../storage/themeSlice";
 import Cookies from "js-cookie";
 import { setSelectedTab } from "../storage/dashboardSlice";
 

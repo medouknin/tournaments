@@ -14,7 +14,6 @@ import { Link, NavLink } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { Switch } from "antd";
 import { FaMoon, FaSun } from "react-icons/fa";
-import { updateStatuses } from "../storage/rentalsSlice";
 import { useDispatch } from "react-redux";
 import Cookies from 'js-cookie';
 
@@ -34,7 +33,7 @@ function Navbar() {
 	}, [navigate]);
 
 	useEffect(() => {
-        dispatch(updateStatuses());
+        // dispatch(updateStatuses());
     }, [dispatch]);
 
 	const [anchorElNav, setAnchorElNav] = useState(null);

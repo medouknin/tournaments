@@ -37,5 +37,8 @@ Route::prefix('/tournaments')->group(function () {
 });
 
 Route::prefix('teams')->group(function () {
-    Route::post('/', [TeamController::class, 'store'])->name('teams.store');
+    Route::get('/', [TeamController::class, 'index']);
+    Route::post('/store', [TeamController::class, 'store']);
+    Route::get('/my-team/{id}', [TeamController::class, 'myTeam']);
+
 });

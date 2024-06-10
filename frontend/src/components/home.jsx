@@ -1,6 +1,5 @@
 import  { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getBikes } from "../storage/bikesSlice";
 import { getTournaments } from "../storage/tournamentSlice"; 
 import ThumbImage from "../assets/thumb_image.png";
 import Loader from "./loader";
@@ -31,7 +30,6 @@ const Home = () => {
 	];
 
 	useEffect(() => {
-		dispatch(getBikes());
 		dispatch(getTournaments());
 	}, [dispatch]);
 
@@ -42,7 +40,7 @@ const Home = () => {
 	const handleSearch = (value) => {
 		const filtered = tournaments.filter((tournament) => {
 			return (
-				tournament.tournamentType	.toLowerCase().includes(value.toLowerCase())
+				tournament.type	.toLowerCase().includes(value.toLowerCase())
 				// tournament.type.toLowerCase().includes(value.toLowerCase())
 			);
 		});
@@ -52,12 +50,12 @@ const Home = () => {
 	const handleFilter = (type, value) => {
 		if (type === "brand") {
 			const filtered = tournaments.filter((tournament) =>
-				tournament.tournamentType	.toLowerCase().includes(value.toLowerCase())
+				tournament.type	.toLowerCase().includes(value.toLowerCase())
 			);
 			setFilteredTournaments(filtered);
 		} else if (type === "type") {
 			const filtered = tournaments.filter((tournament) =>
-				tournament.tournamentType	.toLowerCase().includes(value.toLowerCase())
+				tournament.type	.toLowerCase().includes(value.toLowerCase())
 			);
 			setFilteredTournaments(filtered);
 		}
