@@ -1,18 +1,22 @@
 <?php
-// database/factories/RankingFactory.php
 
 namespace Database\Factories;
 
-use App\Models\Ranking;
 use App\Models\Team;
 use App\Models\Tournament;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Ranking>
+ */
 class RankingFactory extends Factory
 {
-    protected $model = Ranking::class;
-
-    public function definition()
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
     {
         return [
             'team_id' => Team::factory(),

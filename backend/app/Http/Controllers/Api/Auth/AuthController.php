@@ -15,7 +15,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
     /**
@@ -43,12 +43,12 @@ class AuthController extends Controller
 
     public function register(RegistrationRequest $request){
         $user = User::create($request->validated());
-        if(!$user){
+        if (!$user) {
             return response()->json([
                 'error' => 'Unauthorized',
                 'message' => "Invalid credentials"
             ], 401);
-        }else{
+        } else {
             return response()->json([
                 'token' => auth()->login($user),
                 'user' => $user,

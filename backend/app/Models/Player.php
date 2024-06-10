@@ -1,5 +1,6 @@
 <?php
 
+// app/Models/Player.php
 
 namespace App\Models;
 
@@ -14,3 +15,4 @@ class Player extends Model
         return $this->belongsTo(Team::class);
     }
 }
+

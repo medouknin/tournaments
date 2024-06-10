@@ -1,5 +1,4 @@
 <?php
-
 // app/Models/Team.php
 
 namespace App\Models;
@@ -20,4 +19,3 @@ class Team extends Model
         return $this->hasMany(Player::class);
     }
 }
-

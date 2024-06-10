@@ -1,15 +1,17 @@
 <?php
 
-// database/seeders/TeamSeeder.php
-
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Team;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
 class TeamSeeder extends Seeder
 {
-    public function run()
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
     {
         Team::factory()->count(10)->create();
     }

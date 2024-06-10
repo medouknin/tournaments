@@ -1,16 +1,20 @@
 <?php
-// database/factories/StadeFactory.php
 
 namespace Database\Factories;
 
-use App\Models\Stade;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Stade>
+ */
 class StadeFactory extends Factory
 {
-    protected $model = Stade::class;
-
-    public function definition()
+    /**
+     * Define the model's default state.
+     *
+     * @return array<string, mixed>
+     */
+    public function definition(): array
     {
         return [
             'name' => $this->faker->company . ' Stadium',

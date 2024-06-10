@@ -6,17 +6,15 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
+    // database/migrations/{timestamp}_create_teams_table.php
 
     public function up()
     {
-        Schema::create('players', function (Blueprint $table) {
+        Schema::create('teams', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('team_id')->constrained();
-            $table->integer('goals')->default(0);
+            $table->foreignId('captain_id')->constrained('users');
+            $table->foreignId('tournament_id')->constrained();
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('players');
+        Schema::dropIfExists('teams');
     }
 };

@@ -9,14 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+    // database/migrations/{timestamp}_create_stadiums_table.php
 
     public function up()
     {
-        Schema::create('teams', function (Blueprint $table) {
+        Schema::create('stades', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('captain_id')->constrained('users');
-            $table->foreignId('tournament_id')->constrained();
+            $table->integer('capacity');
+            $table->string('location');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('teams');
+        Schema::dropIfExists('stades');
     }
 };

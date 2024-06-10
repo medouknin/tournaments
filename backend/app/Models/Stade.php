@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Stade extends Model
 {
     use HasFactory;
-
     protected $fillable = ['name', 'capacity', 'location'];
 
 }

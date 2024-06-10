@@ -1,17 +1,18 @@
 <?php
 
-// database/seeders/RankingSeeder.php
-
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Ranking;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
 class RankingSeeder extends Seeder
 {
-    public function run()
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
     {
         Ranking::factory()->count(10)->create();
     }
 }
-

@@ -6,25 +6,25 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    // database/migrations/{timestamp}_create_players_table.php
+
+    public function up()
     {
-        Schema::create('stades', function (Blueprint $table) {
+        Schema::create('players', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('capacity');
-            $table->string('location');
+            $table->foreignId('team_id')->constrained();
+            $table->integer('goals')->default(0);
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('stades');
+        Schema::dropIfExists('players');
     }
 };

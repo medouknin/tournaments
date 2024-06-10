@@ -1,5 +1,6 @@
 <?php
 
+// app/Models/Tournament.php
 
 namespace App\Models;
 

@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     // database/migrations/{timestamp}_create_games_table.php
 
     public function up()
@@ -18,7 +15,7 @@ return new class extends Migration
             $table->foreignId('home_team_id')->constrained('teams');
             $table->foreignId('away_team_id')->constrained('teams');
             $table->foreignId('stade_id')->constrained('stades');
-            $table->foreignId('tournament_id')->constrained('tournaments');
+            $table->foreignId('tournament_id')->constrained();
             $table->date('date');
             $table->integer('home_goals')->default(0);
             $table->integer('away_goals')->default(0);

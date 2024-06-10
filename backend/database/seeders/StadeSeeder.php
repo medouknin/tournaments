@@ -1,17 +1,18 @@
 <?php
 
-// database/seeders/StadeSeeder.php
-
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Stade;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
 class StadeSeeder extends Seeder
 {
-    public function run()
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
     {
         Stade::factory()->count(10)->create();
     }
 }
-

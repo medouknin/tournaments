@@ -1,15 +1,17 @@
 <?php
 
-// database/seeders/PlayerSeeder.php
-
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Player;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
 class PlayerSeeder extends Seeder
 {
-    public function run()
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
     {
         Player::factory()->count(10)->create();
     }
